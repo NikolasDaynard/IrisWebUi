@@ -1,4 +1,4 @@
-export const Tokens = {
+const Tokens = {
   Text: "Text",
   Choice: "Choice",
   Section: "Section",
@@ -15,7 +15,7 @@ export const Tokens = {
   Eof: "Eof",
 };
 
-export class Token {
+class Token {
   constructor(type, content, line) {
     this.type = type;
     this.content = content;
@@ -23,7 +23,11 @@ export class Token {
   }
 }
 
-export class Lexer {
+function getTokens() {
+  return Tokens;
+}
+
+class Lexer {
   constructor(source = "") {
     this.source = source;
     this.tokens = [];
@@ -110,4 +114,8 @@ export class Lexer {
 
     this.tokens.push(new Token(Tokens["Eof"], "\0", this.line));
   }
+}
+
+function getLexer() {
+  return new Lexer();
 }

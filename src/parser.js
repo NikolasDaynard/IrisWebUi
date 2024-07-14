@@ -1,6 +1,13 @@
-import { Tokens } from "./lexer.js";
+function loadScript(url, callback) {
+  const script = document.createElement('script');
+  script.src = url;
+  script.onload = () => callback();
+  document.head.appendChild(script);
+}
 
-export const Types = {
+// import { Tokens } from "./lexer.js";
+
+const Types = {
   Text: "Text",
   Section: "Section",
   Choice: "Choice",
@@ -9,14 +16,18 @@ export const Types = {
   If: "If",
 };
 
-export class Text {
+function getTypes() {
+  return Types;
+}
+
+class Text {
   constructor(content) {
     this.type = Types["Text"];
     this.content = content;
   }
 }
 
-export class Choice {
+class Choice {
   constructor(content, body) {
     this.type = Types["Choice"];
     this.content = content;
@@ -24,7 +35,7 @@ export class Choice {
   }
 }
 
-export class Section {
+class Section {
   constructor(name, body) {
     this.type = Types["Section"];
     this.name = name;
@@ -32,14 +43,14 @@ export class Section {
   }
 }
 
-export class Diversion {
+class Diversion {
   constructor(section) {
     this.type = Types["Diversion"];
     this.section = section;
   }
 }
 
-export class Var {
+class Var {
   constructor(name, value) {
     this.type = Types["Var"];
     this.name = name;
@@ -47,7 +58,7 @@ export class Var {
   }
 }
 
-export class If {
+class If {
   constructor(condition, body) {
     this.type = Types["If"];
     this.condition = condition;
@@ -55,7 +66,7 @@ export class If {
   }
 }
 
-export class Parser {
+class Parser {
   constructor(tokens) {
     this.tokens = tokens;
     this.ast = [];
