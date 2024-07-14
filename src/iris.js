@@ -8,26 +8,43 @@ function loadScript(url, callback) {
   document.head.appendChild(script);
 }
 
-// const lexer = loadScript('./src/lexer.js', () => {return getLexer()});
-const parserScript = loadScript('./src/parser.js');
-const codegenScript = loadScript('./src/codegen.js');
+const iframe = document.getElementById('content');
 
 function run(filename) {
-  console.log(loadScript('./src/lexer.js', () => {return getLexer()}));
-  console.log(lexer);
+  // console.log(loadScript('./src/lexer.js', () => {return getLexer()}));
+  // console.log(lexer);
   getLexer();
   
-  const lexer = new getLexer()();
+  const lexer = new Lexer(`Testing
+  ~ counter = 0
+
+  > Loop
+  
+  - Add
+  ~ counter = counter + 1
+  Your counter is \${counter}
+  > Loop
+  
+  - Loop
+  + Add to counter
+  > Add`);
   lexer.scan();
 
-  // const parser = new Parser(lexer.tokens);
+  const parser = new Parser(lexer.tokens);
   parser.parse();
 
-  // const codegen = new CodeGen(parser.ast);
+  const codegen = new CodeGen(parser.ast);
+  console.log("thing")
   if (!parser.errored) {
     codegen.generate();
     try {
-      fs.writeFileSync(`./${filename}.html`, codegen.html);
+      console.log(codegen.html);
+      // contentDiv.innerHTML += codegen.html;
+      // // page.setContentHtml
+      // // fs.writeFileSync(`./${filename}.html`, codegen.html);
+      iframe.contentDocument.open();
+      iframe.contentDocument.write(codegen.html);
+      iframe.contentDocument.close();
     } catch (err) {
       console.error(err);
     }

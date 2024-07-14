@@ -3,11 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
+    <title>Iris webui</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        #content {
+            width: 50%;
+            height: 90vh;
+            border: none;
+            float: right;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, World!</h1>
+    <iframe id="content"></iframe>
+    <script src="src/lexer.js"></script>
+    <script src="src/parser.js"></script>
+    <script src="src/codegen.js"></script>
+    <script src="src/iris.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

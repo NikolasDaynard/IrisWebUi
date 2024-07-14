@@ -1,15 +1,3 @@
-function loadScript(url, callback) {
-  if (typeof callback !== 'function') {
-    callback = () => {};
-  }
-  const script = document.createElement('script');
-  script.src = url;
-  script.onload = () => callback();
-  document.head.appendChild(script);
-}
-// const Types = loadScript("./src/parser.js", () => getTypes());
-
-
 class CodeGen {
   constructor(ast) {
     this.ast = ast;
