@@ -9,3 +9,28 @@ body {
 h1 {
     color: #333;
 }
+
+#text-box-drag {
+    position: relative;
+    top: 0; 
+    left: 40%;
+    width: 10px;
+    height: 90vh;
+    background-color: rgb(209, 66, 241);
+    z-index: 9999;
+    cursor: ew-resize;
+}
+
+#text-box-container {
+    margin-bottom: 0px;
+}
+
+#text-box {
+    width: 40%;
+    height: 90vh;
+    padding: 1px;
+    font-size: 16px;
+    border: none;
+    float: left;
+    resize: none;
+}

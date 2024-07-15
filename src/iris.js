@@ -10,24 +10,8 @@ function loadScript(url, callback) {
 
 const iframe = document.getElementById('content');
 
-function run(filename) {
-  // console.log(loadScript('./src/lexer.js', () => {return getLexer()}));
-  // console.log(lexer);
-  getLexer();
-  
-  const lexer = new Lexer(`Testing
-  ~ counter = 0
-
-  > Loop
-  
-  - Add
-  ~ counter = counter + 1
-  Your counter is \${counter}
-  > Loop
-  
-  - Loop
-  + Add to counter
-  > Add`);
+function run(irisScript) {
+  const lexer = new Lexer(irisScript);
   lexer.scan();
 
   const parser = new Parser(lexer.tokens);
